@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol Safari</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #121212; /* Very dark gray background for dark mode */
+            color: #E0E0E0; /* Light text color for readability */
+            margin: 0;
+            padding: 0;
+        }
+        #gameContainer {
+            margin: 20px auto;
+            width: 600px;
+            height: 400px;
+            position: relative;
+            border-radius: 20px;
+            background-color: #1E1E1E; /* Slightly lighter dark gray */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5); /* Soft shadow for depth */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: 5px solid #4FC3F7; /* Light blue border for a bright accent */
+        }
+        #symbol {
+            font-size: 100px;
+            color: #FFEB3B; /* Bright yellow for high visibility */
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        #feedback {
+            margin-top: 20px;
+            font-size: 28px;
+            color: #81C784; /* Soft green for positive feedback */
+            font-weight: bold;
+        }
+        #start {
+            margin-top: 20px;
+            padding: 15px 25px;
+            font-size: 20px;
+            background-color: #4FC3F7; /* Light blue background for the button */
+            color: #FFFFFF; /* White text */
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #start:hover {
+            background-color: #29B6F6; /* Slightly darker blue on hover */
+            transform: scale(1.05);
+        }
+        #command {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #B0BEC5; /* Light gray for command text */
+        }
+        h1 {
+            color: #64B5F6; /* Soft blue for the header */
+            font-size: 36px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adding a subtle shadow for better readability */
+        }
+    </style>
+</head>
+<body>
+    <h1>Symbol Safari</h1>
+    <div id="gameContainer">
+        <div id="symbol">⬆️</div> <!-- Initial symbol (up arrow) -->
+    </div>
+    <div id="feedback"></div>  <!-- Feedback message -->
+    <button id="start">Start Listening</button>
+    <p id="command">Say something...</p>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands"></script>
+    <script src="app.js"></script>
+</body>
+</html>
