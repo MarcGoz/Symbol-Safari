@@ -37,7 +37,7 @@ function displaySymbol() {
     hintTimer = setTimeout(showHint, 5000); 
 
     // Start the answer reveal timer (15 seconds for revealing the answer)
-    revealTimer = setTimeout(revealAnswer, 15000);
+    revealTimer = setTimeout(revealAnswer, 10000);
 }
 
 function showHint() {
