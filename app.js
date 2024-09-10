@@ -23,18 +23,46 @@ const symbols = [
 ];
 
 let currentSymbolIndex = 0; // Index to keep track of current symbol
+let hintTimer, revealTimer; // Timers for hint and reveal
 
 function displaySymbol() {
     // Update the symbol on the screen
     document.getElementById('symbol').innerText = symbols[currentSymbolIndex].icon;
+
+    // Reset timers whenever a new symbol is shown
+    clearTimeout(hintTimer);
+    clearTimeout(revealTimer);
+
+    // Start the hint timer (5 seconds for hint)
+    hintTimer = setTimeout(showHint, 5000); 
+
+    // Start the answer reveal timer (15 seconds for revealing the answer)
+    revealTimer = setTimeout(revealAnswer, 15000);
+}
+
+function showHint() {
+    const feedback = document.getElementById('feedback');
+    feedback.innerText = `Hint: The command starts with "${symbols[currentSymbolIndex].command.charAt(0)}"`;
+    feedback.style.color = "#FFEB3B"; // Bright yellow for the hint
+}
+
+function revealAnswer() {
+    const feedback = document.getElementById('feedback');
+    feedback.innerText = `The correct answer was "${symbols[currentSymbolIndex].command}"!`;
+    feedback.style.color = "#FF5722"; // Orange for the reveal
+    setTimeout(nextSymbol, 2000); // Move to the next symbol after 2 seconds
 }
 
 function giveFeedback(isCorrect) {
     const feedback = document.getElementById('feedback');
+    clearTimeout(hintTimer); // Cancel hint when they answer
+    clearTimeout(revealTimer); // Cancel reveal when they answer
+
     if (isCorrect) {
         feedback.innerText = "That's correct! 🎉";
         feedback.style.color = "#4CAF50";
         feedback.style.fontSize = "30px";
+        setTimeout(nextSymbol, 1500); // Move to next symbol after 1.5 seconds
     } else {
         feedback.innerText = "Try again!";
         feedback.style.color = "#F44336";
@@ -51,7 +79,6 @@ function nextSymbol() {
 function checkCommand(command) {
     if (command === symbols[currentSymbolIndex].command) {
         giveFeedback(true);
-        setTimeout(nextSymbol, 1500); // Move to next symbol after 1.5 seconds
     } else {
         giveFeedback(false);
     }
